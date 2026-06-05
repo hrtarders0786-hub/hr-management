@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR LIBRARY - Premium Study Zone</title>
+    <style>
+        /* --- Global Setup & Colors --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #f1f5f9;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        /* --- Header & Sticky Nav --- */
+        header {
+            background: #0f172a;
+            color: #fff;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: #38bdf8;
+            letter-spacing: 1px;
+        }
+
+        header nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        header nav a:hover {
+            color: #38bdf8;
+        }
+
+        /* --- Hero Banner --- */
+        .hero {
+            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), url('https://images.unsplash.com/photo-1497633762265-9d179a990aa6?q=80&w=2073') no-repeat center center/cover;
+            padding: 100px 0;
+            color: #fff;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #94a3b8;
+            margin-bottom: 30px;
+        }
+
+        /* --- Live Seat Tracker Widget --- */
+        .seat-counter-box {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-around;
+            max-width: 600px;
+            margin: -50px auto 40px auto;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border: 1px solid #334155;
+        }
+
+        .counter-item {
+            text-align: center;
+            color: #fff;
+        }
+
+        .counter-item span {
+            display: block;
+            font-size: 32px;
+            font-weight: bold;
+            color: #38bdf8;
+        }
+
+        .counter-item .vacant-color {
+            color: #4ade80;
+        }
+
+        /* --- Sections Style --- */
+        section {
+            padding: 60px 0;
+        }
+
+        section h2 {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 40px;
+            color: #0f172a;
+        }
+
+        /* --- Grid Features & Shifts --- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-top: 4px solid #38bdf8;
+            text-align: center;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+            color: #0f172a;
+        }
+
+        .card p {
+            color: #64748b;
+        }
+
+        /* --- Split Layout (Form & Contact) --- */
+        .split-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 40px;
+            background: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .contact-details h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .contact-details p {
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+
+        form input, form select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        form button {
+            background: #38bdf8;
+            color: #0f172a;
+            font-weight: bold;
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        form button:hover {
+            background: #0ea5e9;
+            color: #fff;
+        }
+
+        /* --- 🛠️ MANAGEMENT SYSTEM (ADMIN PANEL) --- */
+        .admin-section {
+            background: #0f172a;
+            color: #fff;
+            padding: 40px 20px;
+            border-radius: 12px;
+            margin-top: 40px;
+        }
+
+        .admin-section h2 {
+            color: #fff;
+            text-align: left;
+            margin-bottom: 20px;
+            font-size: 24px;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 10px;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            text-align: left;
+        }
+
+        table th, table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #334155;
+            font-size: 15px;
+        }
+
+        table th {
+            background-color: #1e293b;
+            color: #38bdf8;
+        }
+
+        table tr:hover {
+            background-color: #1e293b;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 20px;
+            color: #64748b;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 50px;
+            border-top: 1px solid #334155;
+        }
+
+        /* Responsive Layout */
+        @media(max-width: 768px) {
+            .nav-wrapper { flex-direction: column; text-align: center; }
+            header nav { margin-top: 15px; }
+            .split-layout { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Navigation Bar -->
+    <header>
+        <div class="container nav-wrapper">
+            <div class="logo">HR LIBRARY</div>
+            <nav>
+                <a href="#home">Home</a>
+                <a href="#facilities">Facilities</a>
+                <a href="#shifts">Shift Timings</a>
+                <a href="#enroll">Book Seat</a>
+                <a href="#admin-panel">Management System</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Hero Banner -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>Welcome to HR LIBRARY</h1>
+            <p>शांतिपूर्ण वातावरण और आधुनिक सुविधाओं के साथ आपकी सफलता का डिजिटल पार्टनर।</p>
+        </div>
+    </section>
+
+    <!-- LIVE SEAT TRACKER COUNTER -->
+    <div class="seat-counter-box">
+        <div class="counter-item">
+            <span id="total-seats">100</span>
+            कुल सीटें (Total)
+        </div>
+        <div class="counter-item">
+            <span id="booked-seats">0</span>
+            बुक सीटें (Booked)
+        </div>
+        <div class="counter-item">
+            <span id="vacant-seats" class="vacant-color">100</span>
+            खाली सीटें (Vacant)
+        </div>
+    </div>
+
+    <!-- OUR FACILITIES SECTION -->
+    <section id="facilities" class="container">
+        <h2>Our Facilities</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>High-Speed Wi-Fi</h3>
+                <p>बिना किसी रुकावट के ऑनलाइन लेक्चर और डाउनलोडिंग के लिए 5G वाई-फाई सुविधा।</p>
+            </div>
+            <div class="card">
+                <h3>Comfortable Seating</h3>
+                <p>लंबे समय तक बिना थके पढ़ाई करने के लिए आरामदायक गद्देदार कुर्सियां और केबिन।</p>
+            </div>
+            <div class="card">
+                <h3>RO Drinking Water</h3>
+                <p>छात्रों के अच्छे स्वास्थ्य के लिए ठंडे और शुद्ध पीने के पानी की उत्तम व्यवस्था।</p>
+            </div>
+            <div class="card">
+                <h3>Peaceful Environment</h3>
+                <p>पूरी तरह से शांत, साफ-सुथरा और पूरी तरह से वातानुकूलित (Full AC) स्टडी हॉल।</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SHIFT TIMINGS SECTION -->
+    <section id="shifts" style="background-color: #e2e8f0;">
+        <div class="container">
+            <h2>Shift Timings</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Shift 1 (Morning)</h3>
+                    <p><strong>06:00 AM - 10:00 AM</strong></p>
+                </div>
+                <div class="card">
+                    <h3>Shift 2 (Afternoon 1)</h3>
+                    <p><strong>10:00 AM - 02:00 PM</strong></p>
+                </div>
+                <div class="card">
+                    <h3>Shift 3 (Afternoon 2)</h3>
+                    <p><strong>02:00 PM - 06:00 PM</strong></p>
+                </div>
+                <div class="card">
+                    <h3>Shift 4 (Evening)</h3>
+                    <p><strong>06:00 PM - 10:00 PM</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ENROLLMENT & CONTACT SECTION -->
+    <section id="enroll" class="container">
+        <h2>Student Registration & Contact Us</h2>
+        <div class="split-layout">
+            <div class="contact-details">
+                <h3>Contact Info</h3>
+                <p><strong>📍 लोकेशन:</strong> पूर्णिया, बिहार</p>
+                <p><strong>📞 मोबाइल:</strong> 8178843794, 7480970684</p>
+                <p><strong>👤 संचालन कर्ता:</strong> MD RAIYYAN</p>
+                <hr style="margin: 20px 0; border: 0; border-top: 1px solid #cbd5e1;">
+                <p style="color: #64748b; font-size: 14px;">नोट: छात्र इस फॉर्म को भरकर अपनी सीट तुरंत लॉक कर सकते हैं। डेटा सीधे आपके लोकल सिस्टम डेटाबेस में सुरक्षित रहेगा।</p>
+            </div>
+            
+            <!-- Student Enrollment Form -->
+            <div>
+                <form id="studentForm">
+                    <input type="text" id="studentName" placeholder="छात्र का पूरा नाम" required>
+                    <input type="tel" id="studentPhone" placeholder="मोबाइल नंबर (10 अंक)" pattern="[0-9]{10}" required>
+                    <select id="studentShift" required>
+                        <option value="">पढ़ने के लिए शिफ्ट चुनें</option>
+                        <option value="Shift 1 (06:00 AM - 10:00 AM)">Shift 1 (06:00 AM - 10:00 AM)</option>
+                        <option value="Shift 2 (10:00 AM - 02:00 PM)">Shift 2 (10:00 AM - 02:00 PM)</option>
+                        <option value="Shift 3 (02:00 PM - 06:00 PM)">Shift 3 (02:00 PM - 06:00 PM)</option>
+                        <option value="Shift 4 (06:00 PM - 10:00 PM)">Shift 4 (06:00 PM - 10:00 PM)</option>
+                    </select>
+                    <button type="submit">Enroll Now (सीट बुक करें)</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- 🛠️ CENTRAL MANAGEMENT SYSTEM (ADMIN DASHBOARD) -->
+    <section id="admin-panel" class="container">
+        <div class="admin-section">
+            <h2>Central Management System (केवल ओनर के देखने के लिए)</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>छात्र का नाम</th>
+                            <th>मोबाइल नंबर</th>
+                            <th>चुनी गई शिफ्ट</th>
+                            <th>Registration Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentTableBody">
+                        <!-- यहाँ छात्रों का डेटा ऑटोमैटिक जुड़ता जाएगा -->
+                        <tr id="noDataRow"><td colspan="5" class="no-data">अभी तक किसी छात्र ने एनरोल नहीं किया है।</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Area -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 HR LIBRARY. All Rights Reserved. | Run by:- MD RAIYYAN</p>
+        </div>
+    </footer>
+
+    <!-- --- JAVASCRIPT LOGIC (FOR LIVE DATA MANAGEMENT) --- -->
+    <script>
+        // टोटल सीटें मान लेते हैं 100 हैं
+        const totalSeats = 100;
+        
+        // लोकल स्टोरेज से पुराना एनरोल किया हुआ डेटा लोड करना (ताकि रिफ्रेश करने पर डेटा डिलीट न हो)
+        let enrolledStudents = JSON.parse(localStorage.getItem('hrLibraryStudents')) || [];
+
+        // डोम एलिमेंट्स उठाना
+        const studentForm = document.getElementById('studentForm');
+        const studentTableBody = document.getElementById('studentTableBody');
+        const noDataRow = document.getElementById('noDataRow');
+        const bookedSeatsEl = document.getElementById('booked-seats');
+        const vacantSeatsEl = document.getElementById('vacant-seats');
+
+        // स्क्रीन पर लाइव सीट काउंटर और टेबल को अपडेट करने वाला फंक्शन
+        function updateDashboard() {
+            // काउंटर अपडेट
+            const totalBooked = enrolledStudents.length;
+            const totalVacant = totalSeats - totalBooked;
+
+            bookedSeatsEl.innerText = totalBooked;
+            vacantSeatsEl.innerText = totalVacant;
+
+            // टेबल साफ करना
+            studentTableBody.innerHTML = '';
+
+            if (enrolledStudents.length === 0) {
+                studentTableBody.appendChild(noDataRow);
+            } else {
+                // लूप चलाकर हर छात्र का डेटा टेबल में जोड़ना
+                enrolledStudents.forEach((student, index) => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td><strong>${index + 1}</strong></td>
+                        <td>${student.name}</td>
+                        <td>${student.phone}</td>
+                        <td>${student.shift}</td>
+                        <td>${student.date}</td>
+                    `;
+                    studentTableBody.appendChild(row);
+                });
+            }
+        }
+
+        // फॉर्म सबमिट होने पर डेटा कैप्चर करना
+        studentForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // पेज रीलोड होने से रोकना
+
+            // इनपुट वैल्यूज निकालना
+            const name = document.getElementById('studentName').value.trim();
+            const phone = document.getElementById('studentPhone').value.trim();
+            const shift = document.getElementById('studentShift').value;
+            const currentDate = new Date().toLocaleDateString('hi-IN') + ' ' + new Date().toLocaleTimeString('en-US', {hour: '2-digit', minute:'2-digit'});
+
+            // नया छात्र ऑब्जेक्ट बनाना
+            const newStudent = { name, phone, shift, date: currentDate };
+
+            // डेटा एरे में पुश करना
+            enrolledStudents.push(newStudent);
+
+            // ब्राउज़र मेमोरी (LocalStorage) में सेव करना ताकि डेटा परमानेंट रहे
+            localStorage.setItem('hrLibraryStudents', JSON.stringify(enrolledStudents));
+
+            // डैशबोर्ड रिफ्रेश करना
+            updateDashboard();
+
+            // फॉर्म को खाली करना और अलर्ट देना
+            studentForm.reset();
+            alert('बधाई हो! आपकी सीट सफलतापूर्वक बुक हो गई है और मैनेजमेंट सिस्टम में सेव कर दी गई है।');
+        });
+
+        // पहली बार पेज लोड होने पर डेटा दिखाना
+        updateDashboard();
+    </script>
+</body>
+</html>
